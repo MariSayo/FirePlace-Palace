@@ -6,7 +6,7 @@ const Hero = () => {
     <section className={styles.hero}>
       <div className={styles.heroImage}>
         <Image
-          src="/public/hero-mobile.png"
+          src="/hero-mobile.png"
           alt="hero mobile"
           priority={true}
           width="500"

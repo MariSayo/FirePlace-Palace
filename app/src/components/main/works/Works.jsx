@@ -7,7 +7,7 @@ const Works = () => {
       <div className="cardWrapper">
         <div className="call">
           <Image
-            src="/public/how-it-works-1.png"
+            src="/how-it-works-1.png"
             alt="Picture of a fireplace"
             width="500"
             height="500"
@@ -22,7 +22,7 @@ const Works = () => {
 
         <div className="weCome">
           <Image
-            src="/public/how-it-works-2.png"
+            src="/how-it-works-2.png"
             alt="woman by desk"
             width="500"
             height="500"
@@ -37,7 +37,7 @@ const Works = () => {
 
         <div className="recommend">
           <Image
-            src="/public/how-it-works-3.png"
+            src="/how-it-works-3.png"
             alt="woman by desk"
             width="500"
             height="500"
