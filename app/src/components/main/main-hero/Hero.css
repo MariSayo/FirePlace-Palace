@@ -1,0 +1,38 @@
+/* Hero */
+.hero-text {
+  background-color: orange;
+  padding: 1rem;
+}
+.hero-text h1 {
+  font-size: 3.1rem;
+  font-weight: 600;
+  margin-bottom: 0.5rem;
+}
+.hero-text h3 {
+  font-size: 1.7rem;
+  font-weight: 600;
+  margin-bottom: 0.5rem;
+}
+.hero-text h3 .colour-change {
+  color: white;
+}
+
+@media only screen and(min-width: 768px) {
+  /* hero make grid 2 column */
+  .hero {
+    display: grid;
+    grid-template-areas: "left right";
+    gap: 2rem;
+    grid-column-start: 3;
+    grid-column-end: 4;
+  }
+  .hero-image {
+    grid-area: left;
+  }
+  .hero-text {
+    grid-area: right;
+    align-self: center;
+    max-width: 70%;
+    justify-self: end;
+  }
+}
