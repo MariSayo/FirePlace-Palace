@@ -3,7 +3,7 @@ import Image from "next/image";
 
 const Hero = () => {
   return (
-    <section className={styles.hero}>
+    <section className={styles.heroWrapper}>
       <div className={styles.heroImage}>
         <Image
           src="/hero-mobile.png"
