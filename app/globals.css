@@ -1,0 +1,166 @@
+@import url("https://fonts.googleapis.com/css2?family=Aleo:ital,wght@0,100..900;1,100..900&display=swap");
+
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+  font-family: "Aleo", serif;
+}
+body {
+  padding: 0.5rem;
+}
+img {
+  width: 100%;
+  height: auto;
+}
+
+ul {
+  list-style-type: none;
+}
+
+.wrapper {
+  width: 100%;
+  height: 100dvh;
+  display: grid;
+  grid-template-areas:
+    "header"
+    "main"
+    "footer";
+  /* grid-template-rows: 1fr 8fr 1fr; */
+}
+
+.siteHeader {
+  grid-area: header;
+  font-size: 2rem;
+  font-weight: 700;
+  padding: 1rem;
+}
+
+.siteMain {
+  grid-area: main;
+  padding: 0 1rem;
+}
+
+.siteFooter {
+  grid-area: footer;
+}
+
+/* section */
+section {
+  margin: 1rem 0;
+  width: 100%;
+}
+
+.works h2 {
+  font-size: 2rem;
+  text-align: center;
+  border-bottom: 1px solid grey;
+  padding: 1rem 0;
+}
+.works div {
+  margin-bottom: 1rem;
+}
+/* section call */
+.call {
+  border-bottom: 1px solid grey;
+  padding: 0 0 1rem 0;
+}
+
+.sectionImg {
+  width: 300px;
+  display: block;
+  margin: 0 auto;
+}
+
+.call h3 {
+  font-size: 1.5rem;
+  font-weight: 700;
+  text-align: center;
+  margin-bottom: 0.5rem;
+}
+.call p {
+  font-size: 1.5rem;
+  text-align: center;
+}
+/* section we-come */
+.weCome {
+  border-bottom: 1px solid grey;
+  padding: 0 0 1rem 0;
+}
+
+.sectionImg {
+  width: 300px;
+  display: block;
+  margin: 0 auto;
+}
+
+.weCome h3 {
+  font-size: 1.5rem;
+  font-weight: 700;
+  text-align: center;
+  margin-bottom: 0.5rem;
+}
+.weCome p {
+  font-size: 1.5rem;
+  text-align: center;
+}
+/* recommend */
+.recommend {
+  padding: 0 0 1rem 0;
+}
+
+.sectionImg {
+  width: 300px;
+  display: block;
+  margin: 0 auto;
+}
+
+.recommend h3 {
+  font-size: 1.5rem;
+  font-weight: 700;
+  text-align: center;
+  margin-bottom: 0.5rem;
+}
+.recommend p {
+  font-size: 1.5rem;
+  text-align: center;
+}
+
+/* media query */
+
+@media only screen and (min-width: 768px) {
+  .wrapper {
+    grid-template-areas:
+      "header header header header"
+      "main main main main"
+      "footer footer footer footer";
+  }
+  .siteHeader {
+    max-width: 1280px;
+    width: 100%;
+    margin: 0 auto;
+  }
+  .siteMain {
+    margin: 0 auto;
+    max-width: 1280px;
+  }
+
+  /* wors make grid 3 column */
+  .cardWrapper {
+    display: grid;
+    grid-template-areas: "card1 card2 card3";
+    gap: 1rem;
+    margin: 1rem 0;
+  }
+  .call {
+    grid-area: card1;
+    border: none;
+  }
+  .weCome {
+    grid-area: card2;
+    border: none;
+  }
+  .recommend {
+    grid-area: card3;
+  }
+}

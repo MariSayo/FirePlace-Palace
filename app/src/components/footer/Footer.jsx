@@ -7,13 +7,11 @@ const socials = [
 ];
 
 export default function Footerlist() {
-  const listItems = socials.map((social) => (
-    <li key={social.id}>{socials.social}</li>
-  ));
+  const listItems = socials.map((item) => <li key={item.id}>{item.social}</li>);
   return (
     <>
-      <footer className="site-footer">
-        <div className="find-us-on">
+      <footer className="siteFooter">
+        <div className="findUsOn">
           <p> Find us on:</p>
           <ul>{listItems}</ul>
         </div>

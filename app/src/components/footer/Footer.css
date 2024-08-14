@@ -1,4 +1,4 @@
-.site-footer {
+.siteFooter {
   display: flex;
   align-items: center;
   justify-content: space-between;
@@ -7,7 +7,7 @@
 }
 
 @media only screen and (min-width: 768px) {
-  .site-footer {
+  .siteFooter {
     margin: 0 1rem;
     border-radius: 1rem;
   }
