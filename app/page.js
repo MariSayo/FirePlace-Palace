@@ -7,10 +7,7 @@ export default function Home() {
     <>
       <div className="wrapper">
         <Header />
-
-        <main className="site-main">
-          <Main />
-        </main>
+        <Main />
         <Footer />
       </div>
     </>

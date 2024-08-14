@@ -1,12 +1,17 @@
 import styles from "./Hero.module.css";
 import Image from "next/image";
-import heroImg from "/app/src/images/hero-mobile.png";
 
 const Hero = () => {
   return (
     <section className={styles.hero}>
       <div className={styles.heroImage}>
-        <Image src={heroImg} alt="hero mobile" priority={true} />
+        <Image
+          src="/public/hero-mobile.png"
+          alt="hero mobile"
+          priority={true}
+          width="500"
+          height="500"
+        />
       </div>
       <div className={styles.heroText}>
         <h1>Discover the Perfect Fireplace...</h1>

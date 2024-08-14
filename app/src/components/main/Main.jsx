@@ -1,10 +1,12 @@
 import Hero from "./main-hero/Hero";
 import Works from "./works/Works";
 const Main = () => {
-  return (<>
-  <Hero />
-  <Works />
-  </>)
+  return (
+    <main className="site-main">
+      <Hero />
+      <Works />
+    </main>
+  );
 };
 
 export default Main;
