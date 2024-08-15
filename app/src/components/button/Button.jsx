@@ -1,38 +1,45 @@
 'use client'
 import Image from 'next/image'
 import { useState } from 'react'
+import Link from 'next/link'
+import styles from './src/Button.module.css'
 
-const Header = () => {
+const Button = () => {
     const [menuStatus, SetMenuStatus] = useState(false)
   
-    function handleClick() {
-      SetMenuStatus(!menuStatus)
-      { menuStatus ? 'orange' : 'transparent'}
-      console.log('button clicks')
+    function openMenu() {
+      SetMenuStatus(true);
     }
+     function closeMenu() {
+      SetMenuStatus(false);
+     }
   
     return (
-      <header className='siteHeader'>
-        <h3>🔥Fireplace Palace</h3>
-        <button onClick={handleClick}>
-          {/* <div className = {styles.headerButtonmenuStatus}></div>
-          <div className = {styles.blueBackground}></div> */}
-  
+    <>
+        <Button onClick={openMenu}className={styles.openBurger}>
         <Image
               src="/menu-open-button.png"
               alt="Le burger"
               width={5}
               height={5}
-              className="openBurger"
-          />
-          </button>
-        {menuStatus && <p>menu</p>}
-      </header>
-    )
-  }
+              />
+          </Button>
+          
+
+          
+
+        {menuStatus && (
+          <div className={styles.menu}>
+            <button onClick={closeMenu}>Close Menu</button>
+            <Link href="/founders">Got to founders page</Link>
+          </div>
+        )}
+         </>
+  )
+}
   
 //   export default Header
-export default handleClick;
+export default Button;
   
   // menu toggle turns into the burger image permanently ✅
   
