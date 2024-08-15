@@ -6,8 +6,8 @@ import Main from "./src/components/main/Main"
 export default function Home() {
   return (
     <>
+    <main className="siteMain">
       <Link href="founders">Got to founders page</Link>
-      <main className="siteMain">
         <Main />
       </main>
     </>

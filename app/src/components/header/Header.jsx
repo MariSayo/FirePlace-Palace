@@ -1,4 +1,5 @@
 'use client'
+
 import { useState } from 'react'
 
 const Header = () => {
@@ -6,13 +7,13 @@ const Header = () => {
 
   function handleClick() {
     SetMenuStatus(!menuStatus)
-    console.log(menuStatus)
+    console.log('button clicks')
   }
-
   return (
     <header className='siteHeader'>
       <h3>🔥Fireplace Palace</h3>
       <button onClick={handleClick}>Menu toggle</button>
+      {menuStatus && <p>menu</p>}
     </header>
   )
 }
