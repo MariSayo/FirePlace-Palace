@@ -1,4 +1,4 @@
-import "./Footer.css";
+import "./Footer.module.css";
 
 const socials = [
   { social: "Facebook", id: 1 },
