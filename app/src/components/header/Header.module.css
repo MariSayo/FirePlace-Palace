@@ -1,0 +1,8 @@
+.headerButton {
+    border: none;
+    background-color: transparent;
+}
+
+.headerButton.blueBackground {
+    background-color: blue;
+}
