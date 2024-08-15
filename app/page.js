@@ -1,6 +1,5 @@
 import Link from 'next/link';
 import Main from "./src/components/main/Main"
-import { useState } from 'react';
 
 
 

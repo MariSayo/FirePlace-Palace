@@ -1,16 +1,16 @@
-import styles from "./Hero.module.css";
-import Image from "next/image";
+import styles from './Hero.module.css'
+import Image from 'next/image'
 
 const Hero = () => {
   return (
     <section className={styles.heroWrapper}>
       <div className={styles.heroImage}>
         <Image
-          src="/hero-mobile.png"
-          alt="hero mobile"
+          src='/hero-mobile.png'
+          alt='hero mobile'
           priority={true}
-          width="500"
-          height="500"
+          width='500'
+          height='500'
         />
       </div>
       <div className={styles.heroText}>
@@ -21,7 +21,7 @@ const Hero = () => {
         </h3>
       </div>
     </section>
-  );
-};
+  )
+}
 
-export default Hero;
+export default Hero
