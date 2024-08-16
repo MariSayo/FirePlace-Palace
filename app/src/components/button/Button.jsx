@@ -2,7 +2,7 @@
 import Image from 'next/image'
 import { useState } from 'react'
 import Link from 'next/link'
-import styles from './src/Button.module.css'
+import styles from './Button.module.css'
 
 const Button = () => {
     const [menuStatus, SetMenuStatus] = useState(false)
@@ -16,22 +16,29 @@ const Button = () => {
   
     return (
     <>
-        <Button onClick={openMenu}className={styles.openBurger}>
+        <button onClick={openMenu}className={styles.openBurger}>
         <Image
               src="/menu-open-button.png"
               alt="Le burger"
               width={5}
               height={5}
               />
-          </Button>
-          
-
-          
-
+          </button>
+      
         {menuStatus && (
           <div className={styles.menu}>
-            <button onClick={closeMenu}>Close Menu</button>
-            <Link href="/founders">Got to founders page</Link>
+              <button onClick={closeMenu}className={styles.closeBurger}>
+              <Image
+                src="/menu-close-button.png"
+                alt="close the menu page"
+                width={5}
+                height={5}
+              />
+            </button>
+            <br></br>
+            <Link href="/founders" onClick = {closeMenu}>Got to founders page</Link>
+            <br></br>
+            <Link href="/" onClick = {closeMenu}>Go to the main page</Link>
           </div>
         )}
          </>
