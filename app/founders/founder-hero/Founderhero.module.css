@@ -1,0 +1,26 @@
+.founderheroText {
+    background-color: orange;
+    padding: 1rem;
+  }
+  .founderheroText h1 {
+    font-size: 3.1rem;
+    font-weight: 600;
+    margin-bottom: 0.5rem;
+  }
+ 
+  @media only screen and (min-width: 768px) {
+    .founderheroWrapper {
+      display: grid;
+      grid-template-areas: "left right";
+      gap: 2rem;
+    }
+    .founderheroImage {
+      grid-area: left;
+    }
+    .founderheroText {
+      grid-area: right;
+      align-self: center;
+      max-width: 70%;
+      justify-self: end;
+    }
+  }

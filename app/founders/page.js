@@ -1,6 +1,9 @@
+import Founderhero from "./founder-hero/Founderhero";
+import Founderworks from "./founder-works/Founderworks";
+
 export default function Founders() {
     return (<>
-        <h1>Founders</h1>
-        
+        <Founderhero />
+        <Founderworks />
     </>);
 }

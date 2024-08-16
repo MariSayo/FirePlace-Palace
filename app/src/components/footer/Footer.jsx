@@ -1,4 +1,4 @@
-import "./Footer.module.css";
+import styles from './Footer.module.css'
 
 const socials = [
   { social: "Facebook", id: 1 },
@@ -10,7 +10,7 @@ export default function Footerlist() {
   const listItems = socials.map((item) => <li key={item.id}>{item.social}</li>);
   return (
     <>
-      <footer className="siteFooter">
+      <footer className={styles.siteFooter}>
         <div className="findUsOn">
           <p> Find us on:</p>
           <ul>{listItems}</ul>
