@@ -3,21 +3,21 @@ import { useState, useEffect } from 'react';
 import styles from "../countryButtons/Country-button.module.css";
 
 
-export default function Countrybutton(){
-const selectReviews = () => {
-    function selectReviews(name){
+export default function CountryButton() {
+    const selectReviews = (name) => {
         console.log(name);
-    }
+    };
+
     return (
         <>
-        <section>
-          <button onClick={() => selectReviews("England")}> England</button>
-          <button onClick={() => selectReviews("Wales")}> Wales</button>
-          <button onClick={() => selectReviews("Scotland")}> Scotland</button>
-          </section>
-      </>
-    )
-  }};
+            <section>
+                <button onClick={() => selectReviews("England")}> England</button>
+                <button onClick={() => selectReviews("Wales")}> Wales</button>
+                <button onClick={() => selectReviews("Scotland")}> Scotland</button>
+            </section>
+        </>
+    );
+}
 
 //   'use client';
 
