@@ -4,57 +4,50 @@ import styles from "../countryButtons/Country-button.module.css";
 
 
 export default function CountryButton() {
-    const selectReviews = (name) => {
-        console.log(name);
-    };
+    const [ selectedCountries, setSelectedCountries ] = useState(null);
+    const [reviewData, setReviewData ] = useState(null);
+
+    useEffect(() => {
+
+      if(selectedCountries) {
+        //fetch data here
+        fetch("https://seal-app-336e8.ondigitalocean.app/reviews?country=England")
+        .then(response => response.json())
+        .then(data => setReviewData(data));
+      }
+    }, [selectedCountries]);
+
+
+    function selectReviews(name) {
+
+      setSelectedCountries(name);
+    }
+    console.log(selectReviews)
 
     return (
         <>
-            <section>
                 <button onClick={() => selectReviews("England")}> England</button>
                 <button onClick={() => selectReviews("Wales")}> Wales</button>
                 <button onClick={() => selectReviews("Scotland")}> Scotland</button>
-            </section>
+
+                { JSON.stringify(reviewData)}
+                {}
         </>
     );
 }
 
-//   'use client';
-
-// import { useState, useEffect } from 'react';
-
-// export default function Pokemon() {
-
-//     const [ selectedPokemon, setSelectedPokemon ] = useState(null);
-//     const [ pokemonData, setPokemonData ] = useState(null);
-
-//     console.log(pokemonData);
-
-//     useEffect(() => {
-
-//         if (selectedPokemon) {
-//             fetch(`https://pokeapi.co/api/v2/pokemon/${selectedPokemon}`)
-//                 .then(response => response.json())
-//                 .then(data => setPokemonData(data));
-//         }
-        
-        
-//     }, [selectedPokemon]);
-
-//     function selectPokemon(name) {
-//         setSelectedPokemon(name);
-//     }
-
-//     return (
-//         <>
-//             <button onClick={() => selectPokemon("charmander")}>Charmander</button>
-//             <button onClick={() => selectPokemon("ditto")}>Ditto</button>
-//             <button onClick={() => selectPokemon("squirtle")}>Squirtle</button>
-
-//             { JSON.stringify(pokemonData)}
-//         </>
-//     )
+//pseudocode
+//to style basic button
+//to be able to click a button which turns orange which opens another display
+// //this display has fetched API data from users:{
+//   "text": "We couldn't be happier with our new fireplace - Mike and Mandy came recommended but we were still blown away by the quality of service. 😊 🏆",
+//   "author": "Amy Mcdonald",
+//   "location": "Inverness",
+//   "businessName": "Fireplace Palace"
 // }
+
+//
+
 
 // Flow of the component :)
 
@@ -68,4 +61,4 @@ export default function CountryButton() {
         // The useEffect code makes a fetch request to get some data.
         // When the request comes back with some data we change the "pokemonData" state to contain that data.
 
-     // Component re-renders becuase "pokemonData" has changed.
+     // Component re-renders because "pokemonData" has changed.
