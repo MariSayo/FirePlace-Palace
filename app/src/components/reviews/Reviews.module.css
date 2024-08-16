@@ -1,0 +1,11 @@
+.reviewSection {
+    font-size: 2rem;
+    text-align: center;
+    border-bottom: 1px solid grey;
+    padding: 1rem 0;
+  }
+
+  .reviewCall {
+    font-size: 1.5rem;
+    text-align: center;
+  }
