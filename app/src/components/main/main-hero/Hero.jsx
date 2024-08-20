@@ -19,7 +19,7 @@ const Hero = () => {
                 <h3>
                     Book consultation:
                     <span className={styles.colourChange}><Link href="/booking"
-                    >Request a call back</Link></span>
+                    >Book consultation</Link></span>
                 </h3>
             </div>
         </section>
