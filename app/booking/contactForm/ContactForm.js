@@ -10,31 +10,28 @@ const ContactForm = () => {
     const [city, setCity] = useState('');
     const [number, setNumber] = useState('');
     const [email, setEmail] = useState('');
-    //const [errorVis, setErrorVis] = useState(false)
+    const [showError, setShowError] = useState(false);
 
-    function handleCLick(e) {
+    function handleClick(e) {
         e.preventDefault();
         if (!fullName || !postcode || !house || !city || !number || !email) {
-            // alert('fill all the fields')
+            setShowError(true); // Show error 
         } else {
             console.log(`fullname: ${fullName},\n postcode: ${postcode},\n house: ${house},\n city: ${city},\n number: ${number},\n email: ${email}`);
-            // reset the value to empty string
-            setFullName('')
-            setPostcode('')
-            setHouse('')
-            setCity('')
-            setNumber('')
-            setEmail('')
+            // Reset the values to empty strings
+            setFullName('');
+            setPostcode('');
+            setHouse('');
+            setCity('');
+            setNumber('');
+            setEmail('');
+            setShowError(false); // Hide error 
         }
     }
 
-    // function toggleError() {
-    //     setErrorVis(true)
-    // }
-
     return (
         <>
-            <form className={styles.form} onSubmit={handleCLick}>
+            <form className={styles.form} onSubmit={handleClick}>
                 <fieldset className={styles.personalInfo}>
                     <legend className={styles.legend}>Personal Information</legend>
                     <label className={styles.label} htmlFor="fname">Full name*</label>
@@ -64,9 +61,12 @@ const ContactForm = () => {
                     <input className={styles.input} type="email" value={email} name="email"
                         onChange={(e) => setEmail(e.target.value)} />
                 </fieldset>
-                {!fullName || !postcode || !house || !city || !number || !email ?
-                    <p className={styles.error}>Error all fields are required - some missing.</p> : null}
-                <button type="submit" className={styles.submit} >Request Design Consultation</button>
+
+                {showError && (
+                    <p className={styles.error}>Error: All fields are required - some are missing.</p>
+                )}
+
+                <button type="submit" className={styles.submit}>Request Design Consultation</button>
             </form>
         </>
     )
