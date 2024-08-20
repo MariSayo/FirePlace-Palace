@@ -10,11 +10,12 @@ const ContactForm = () => {
     const [city, setCity] = useState('');
     const [number, setNumber] = useState('');
     const [email, setEmail] = useState('');
+    //const [errorVis, setErrorVis] = useState(false)
 
     function handleCLick(e) {
         e.preventDefault();
         if (!fullName || !postcode || !house || !city || !number || !email) {
-            alert('fill all the fields')
+            // alert('fill all the fields')
         } else {
             console.log(`fullname: ${fullName},\n postcode: ${postcode},\n house: ${house},\n city: ${city},\n number: ${number},\n email: ${email}`);
             // reset the value to empty string
@@ -26,6 +27,10 @@ const ContactForm = () => {
             setEmail('')
         }
     }
+
+    // function toggleError() {
+    //     setErrorVis(true)
+    // }
 
     return (
         <>
@@ -59,11 +64,10 @@ const ContactForm = () => {
                     <input className={styles.input} type="email" value={email} name="email"
                         onChange={(e) => setEmail(e.target.value)} />
                 </fieldset>
-
-                <button type="submit" className={styles.submit}>Request Design Consultation</button>
+                {!fullName || !postcode || !house || !city || !number || !email ?
+                    <p className={styles.error}>Error all fields are required - some missing.</p> : null}
+                <button type="submit" className={styles.submit} >Request Design Consultation</button>
             </form>
-
-
         </>
     )
 }
