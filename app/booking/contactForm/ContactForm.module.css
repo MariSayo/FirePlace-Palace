@@ -49,3 +49,14 @@
   border-color: #e77422;
   outline: none;
 }
+
+.submit{
+  padding: 0.6rem 1rem;
+  border: none;
+  background: #e77422;
+  color: #fff;
+  font-size: 1.2rem;
+  font-weight: bold;
+  display: block;
+  margin: 0 auto;
+}

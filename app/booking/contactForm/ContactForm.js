@@ -13,8 +13,9 @@ const ContactForm = () => {
 
 function handleCLick(e) {
     e.preventDefault();
-    console.log(fullName);
-    console.log("clicked");
+    if(!fullName){
+        alert('fill full name')
+    }
 }
 
     return (
@@ -23,25 +24,25 @@ function handleCLick(e) {
             <fieldset className={styles.personalInfo}>
             <legend className={styles.legend}>Personal Information</legend>
                 <label className={styles.label} htmlFor="fname">Full name</label>
-                <input className={styles.input} type="text" id="fname" name="fname" onChange={(e)=> setFullName(e.target.value)}/>
+                <input className={styles.input} type="text" value={fullName} name="fname" onChange={(e)=> setFullName(e.target.value)}/>
 
                 <label className={styles.label} htmlFor="postcode">Postcode</label>
-                <input className={styles.input} type="text" id="postcode" name="postcode" onChange={(e)=> setPostcode(e.target.value)}/>
+                <input className={styles.input} type="text" value={postcode} name="postcode" onChange={(e)=> setPostcode(e.target.value)}/>
 
                 <label className={styles.label} htmlFor="house">House/Flat Number and Street Name</label>
-                <input className={styles.input} type="text" id="house" name="house" onChange={(e)=> setHouse(e.target.value)}/>
+                <input className={styles.input} type="text" value={house} name="house" onChange={(e)=> setHouse(e.target.value)}/>
 
                 <label className={styles.label} htmlFor="city">City</label>
-                <input className={styles.input} type="text" id="city" name="city" onChange={(e)=> setCity(e.target.value)}/>
+                <input className={styles.input} type="text" value={city} name="city" onChange={(e)=> setCity(e.target.value)}/>
                 </fieldset>
            
             <fieldset className={styles.contactInfo}>
             <legend className={styles.legend}>Contact Information</legend>
                 <label className={styles.label} htmlFor="number">Phone number</label>
-                <input className={styles.input} type="tel" id="number" name="number"onChange={(e)=> setNumber(e.target.value)}/>
+                <input className={styles.input} type="tel" value={number} name="number" onChange={(e)=> setNumber(e.target.value)}/>
 
                 <label className={styles.label} htmlFor="email">Email Address</label>
-                <input className={styles.input} type="email" id="email" name="email" onChange={(e)=> setEmail(e.target.value)}/>
+                <input className={styles.input} type="email" value={email} name="email" onChange={(e)=> setEmail(e.target.value)}/>
                 </fieldset>
 
                 <button type="submit" className={styles.submit}>Request Design Consultation</button>
