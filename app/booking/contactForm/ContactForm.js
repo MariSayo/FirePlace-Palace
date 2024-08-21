@@ -1,32 +1,62 @@
 'use client'
 import styles from "./ContactForm.module.css"
-import { useState } from "react";
+import { useReducer } from "react";
 import React from "react";
 
-const ContactForm = () => {
-    const [fullName, setFullName] = useState('');
-    const [postcode, setPostcode] = useState('');
-    const [house, setHouse] = useState('');
-    const [city, setCity] = useState('');
-    const [number, setNumber] = useState('');
-    const [email, setEmail] = useState('');
-    const [showError, setShowError] = useState(false);
+const initialState = {
+    data: {
+        fullName: "",
+        postcode: "",
+    },
+    error: false,
+}
 
+function reducer(state, action) {
+    switch (action.type) {
+        case 'SET_FIELD':
+            return {
+                ...state,
+                data: {
+                    ...state.data,
+                    [action.payload.field]: action.payload.value
+                }
+            };
+        case 'SHOW_ERROR':
+            return {
+                ...state,
+                error: true
+            }
+        case 'CLEAR_ERROR':
+            return {
+                ...state,
+                error: false
+            }
+        default:
+            return state;
+    }
+}
+
+const ContactForm = () => {
+    const [state, dispatch] = useReducer(reducer, initialState);
+    console.log(state)
     function handleClick(e) {
         e.preventDefault();
-        if (!fullName || !postcode || !house || !city || !number || !email) {
-            setShowError(true); // Show error 
+        if (!state.data.fullName || !state.data.postcode) {
+            dispatch({ type: 'SHOW_ERROR' });
         } else {
-            console.log(`fullname: ${fullName},\n postcode: ${postcode},\n house: ${house},\n city: ${city},\n number: ${number},\n email: ${email}`);
-            // Reset the values to empty strings
-            setFullName('');
-            setPostcode('');
-            setHouse('');
-            setCity('');
-            setNumber('');
-            setEmail('');
-            setShowError(false); // Hide error 
+            dispatch({ type: 'CLEAR_ERROR' });
+
         }
+    }
+
+    function handleChange(e) {
+        dispatch({
+            type: 'SET_FIELD',
+            payload: {
+                field: e.target.name,
+                value: e.target.value
+            }
+        });
     }
 
     return (
@@ -34,42 +64,34 @@ const ContactForm = () => {
             <form className={styles.form} onSubmit={handleClick}>
                 <fieldset className={styles.personalInfo}>
                     <legend className={styles.legend}>Personal Information</legend>
-                    <label className={styles.label} htmlFor="fname">Full name*</label>
-                    <input className={styles.input} type="text" value={fullName} name="fname"
-                        onChange={(e) => setFullName(e.target.value)} />
+                    {/* fullName input */}
+                    <label className={styles.label} htmlFor="fullName">Full name*</label>
+                    <input className={styles.input}
+                        type="text"
+                        value={state.data.fullName}
+                        name="fullName"
+                        onChange={handleChange} />
 
+                    {/* postcode input */}
                     <label className={styles.label} htmlFor="postcode">Postcode*</label>
-                    <input className={styles.input} type="text" value={postcode} name="postcode"
-                        onChange={(e) => setPostcode(e.target.value)} />
-
-                    <label className={styles.label} htmlFor="house">House/Flat Number and Street Name*</label>
-                    <input className={styles.input} type="text" value={house} name="house"
-                        onChange={(e) => setHouse(e.target.value)} />
-
-                    <label className={styles.label} htmlFor="city">City*</label>
-                    <input className={styles.input} type="text" value={city} name="city"
-                        onChange={(e) => setCity(e.target.value)} />
+                    <input className={styles.input}
+                        type="text"
+                        value={state.data.postcode}
+                        name="postcode"
+                        onChange={handleChange} />
+                    {/* house address input */}
+                    {/* city input */}
                 </fieldset>
 
-                <fieldset className={styles.contactInfo}>
-                    <legend className={styles.legend}>Contact Information</legend>
-                    <label className={styles.label} htmlFor="number">Phone number*</label>
-                    <input className={styles.input} type="tel" value={number} name="number"
-                        onChange={(e) => setNumber(e.target.value)} />
-
-                    <label className={styles.label} htmlFor="email">Email Address*</label>
-                    <input className={styles.input} type="email" value={email} name="email"
-                        onChange={(e) => setEmail(e.target.value)} />
-                </fieldset>
-
-                {showError && (
+                {/* new filedset with email and phone number */}
+                {state.error && (
                     <p className={styles.error}>Error: All fields are required - some are missing.</p>
                 )}
 
                 <button type="submit" className={styles.submit}>Request Design Consultation</button>
             </form>
         </>
-    )
+    );
 }
 
 export default ContactForm;
