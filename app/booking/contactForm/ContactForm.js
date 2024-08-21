@@ -10,6 +10,8 @@ const initialState = {
         postcode: "",
         house: "",
         city: "",
+        number: "",
+        email: ""
     },
     error: false,
 }
@@ -26,7 +28,7 @@ function reducer(state, action) {
                     //this code goes into the 
                     [action.payload.field]: action.payload.value
                 }
-            };
+            }
         case 'SHOW_ERROR':
             return {
                 ...state,
@@ -37,6 +39,8 @@ function reducer(state, action) {
                 ...state,
                 error: false
             }
+        case 'CLEAR_ERROR':
+            return { ...initialState }
         default:
             return state;
     }
@@ -44,7 +48,6 @@ function reducer(state, action) {
 
 const ContactForm = () => {
     const [state, dispatch] = useReducer(reducer, initialState);
-    console.log(state)
     function handleClick(e) {
         //prevents constant refresh of form
         e.preventDefault();
@@ -53,10 +56,10 @@ const ContactForm = () => {
             dispatch({ type: 'SHOW_ERROR' });
         } else {
             dispatch({ type: 'CLEAR_ERROR' });
-
+            dispatch({ type: 'RESET_FIELDS' });
         }
     }
-//function for the dispatch aka the action part. what is inputted in the CASE return part of reducer function
+    //function for the dispatch aka the action part. what is inputted in the CASE return part of reducer function
     function handleChange(e) {
         dispatch({
             type: 'SET_FIELD',
@@ -90,20 +93,31 @@ const ContactForm = () => {
                     {/* house address input */}
                     <label className={styles.label} htmlFor="house">House/Flat Number and Street Name*</label>
                     <input className={styles.input}
-                        type="text" 
+                        type="text"
                         value={state.data.house}
                         name="house"
-                         onChange={handleChange} />
+                        onChange={handleChange} />
                     {/* city input */}
                     <label className={styles.label} htmlFor="city">City*</label>
-                    <input className={styles.input} 
-                         type="text" 
-                        value={state.data.city} 
-                         name="city"
+                    <input className={styles.input}
+                        type="text"
+                        value={state.data.city}
+                        name="city"
                         onChange={handleChange} />
                 </fieldset>
 
                 {/* new filedset with email and phone number */}
+
+                <fieldset className={styles.contactInfo}>
+                    <legend className={styles.legend}>Contact Information</legend>
+                    <label className={styles.label} htmlFor="number">Phone number*</label>
+                    <input className={styles.input} type="tel" value={state.data.number} name="number"
+                        onChange={handleChange} />
+
+                    <label className={styles.label} htmlFor="email">Email Address*</label>
+                    <input className={styles.input} type="email" value={state.data.email} name="email"
+                        onChange={handleChange} />
+                </fieldset>
                 {state.error && (
                     <p className={styles.error}>Error: All fields are required - some are missing.</p>
                 )}
