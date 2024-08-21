@@ -13,6 +13,7 @@ const initialState = {
         number: "",
         email: ""
     },
+    loadingState: false,
     error: false,
 }
 
@@ -39,8 +40,16 @@ function reducer(state, action) {
                 ...state,
                 error: false
             }
-        case 'CLEAR_ERROR':
+        case 'RESET_FIELDS':
             return { ...initialState }
+        case 'BUTTON_SWITCH':
+            return {
+                ...state,
+                data: {
+                    ...state.data
+                },
+                loadingState: true,
+            }
         default:
             return state;
     }
@@ -56,9 +65,15 @@ const ContactForm = () => {
             dispatch({ type: 'SHOW_ERROR' });
         } else {
             dispatch({ type: 'CLEAR_ERROR' });
-            dispatch({ type: 'RESET_FIELDS' });
+            dispatch({ type: 'BUTTON_SWITCH' });
+
+            setTimeout(() => {
+                dispatch({ type: 'RESET_FIELDS' });
+            }, 2000)
         }
     }
+
+
     //function for the dispatch aka the action part. what is inputted in the CASE return part of reducer function
     function handleChange(e) {
         dispatch({
@@ -111,18 +126,29 @@ const ContactForm = () => {
                 <fieldset className={styles.contactInfo}>
                     <legend className={styles.legend}>Contact Information</legend>
                     <label className={styles.label} htmlFor="number">Phone number*</label>
-                    <input className={styles.input} type="tel" value={state.data.number} name="number"
+                    <input className={styles.input}
+                        type="tel"
+                        value={state.data.number}
+                        name="number"
                         onChange={handleChange} />
 
                     <label className={styles.label} htmlFor="email">Email Address*</label>
-                    <input className={styles.input} type="email" value={state.data.email} name="email"
+                    <input className={styles.input}
+                        type="email"
+                        value={state.data.email}
+                        name="email"
                         onChange={handleChange} />
                 </fieldset>
+
                 {state.error && (
                     <p className={styles.error}>Error: All fields are required - some are missing.</p>
                 )}
 
-                <button type="submit" className={styles.submit}>Request Design Consultation</button>
+
+
+                <button type="submit" className={styles.submit}>
+                    {!state.loadingState ? "Request Design Consultation" : "Loading..."}
+                </button>
             </form>
         </>
     );
