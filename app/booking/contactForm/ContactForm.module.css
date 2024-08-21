@@ -67,3 +67,10 @@
   color: red;
   font-weight: bold;
 }
+
+.successMessage {
+  text-align: center;
+  padding: 5rem;
+  background-color: #e77422;
+  font-size: 3rem;
+}

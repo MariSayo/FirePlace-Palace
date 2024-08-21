@@ -14,6 +14,7 @@ const initialState = {
         email: ""
     },
     loadingState: false,
+    successState: false,
     error: false,
 }
 
@@ -50,6 +51,14 @@ function reducer(state, action) {
                 },
                 loadingState: true,
             }
+        case 'SUCCESS_TOGGLE':
+            return {
+                ...state,
+                data: {
+                    ...state.data
+                },
+                successState: true,
+            }
         default:
             return state;
     }
@@ -69,6 +78,7 @@ const ContactForm = () => {
 
             setTimeout(() => {
                 dispatch({ type: 'RESET_FIELDS' });
+                dispatch({ type: 'SUCCESS_TOGGLE' });
             }, 2000)
         }
     }
@@ -87,7 +97,7 @@ const ContactForm = () => {
 
     return (
         <>
-            <form className={styles.form} onSubmit={handleClick}>
+            {!state.successState ? <form className={styles.form} onSubmit={handleClick}>
                 <fieldset className={styles.personalInfo}>
                     <legend className={styles.legend}>Personal Information</legend>
                     {/* fullName input */}
@@ -150,6 +160,11 @@ const ContactForm = () => {
                     {!state.loadingState ? "Request Design Consultation" : "Loading..."}
                 </button>
             </form>
+                :
+                <div className={styles.successMessage}>
+                    <h2>SUCCESSSSSSSSSSSSS</h2>
+                </div>
+            }
         </>
     );
 }
