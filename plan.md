@@ -1,31 +1,24 @@
-- Create booking page route 
-  - create folder ✅
-  - create page ✅
-  - link page ✅
-  - test page ✅
+## change useState to useReduce
 
-  
+```
+const [fullName, setFullName] = useState('');
 
-- Make a new component called "ContactForm"
-  - export it 
-  - import it into booking page
+```
 
+- import the reducer ✅
+- declare the initial state ✅
+- declare the reducer✅
+- declare the reducer function✅
+- declare the switch statement with a default return ✅
 
+- add rest of the states
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-## stretched goals and bug fixes
- - burger menu works on all pages 
+````
+    const [postcode, setPostcode] = useState('');
+   const [house, setHouse] = useState('');
+   const [city, setCity] = useState('');
+   const [number, setNumber] = useState('');
+   const [email, setEmail] = useState('');
+   const [showError, setShowError] = useState(false);
+   ```
+````
