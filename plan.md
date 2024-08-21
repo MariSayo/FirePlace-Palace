@@ -66,7 +66,7 @@ Step 2: Success action
 
 Step 3: Link loading state and error
 If error is present stop loading screen on button
-       - revert button to norm
+       - make sure button normal again ( cant continously show it as loading state)
        
 step 4: Error shows as red box around input that has errored
 - there is indiviudal error message below each box
