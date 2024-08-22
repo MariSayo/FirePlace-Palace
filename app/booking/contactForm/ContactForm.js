@@ -13,10 +13,12 @@ const initialState = {
         city: "",
         number: "",
         email: ""
+       
     },
     loadingState: false,
     successState: false,
     error: false,
+    nameError: false
 };
 
 function reducer(state, action) {
@@ -56,6 +58,17 @@ function reducer(state, action) {
                 loadingState: false,  // Reset loading state after success
                 successState: true,
             };
+            case 'SET_NAME_ERROR':
+                return {
+                    ...state,
+                    nameError: true,
+
+                };
+            case 'CLEAR_NAME_ERROR':
+                return {
+                    ...state,
+                    nameError: false,
+                }
         default:
             return state;
     }
@@ -64,12 +77,33 @@ function reducer(state, action) {
 const ContactForm = () => {
     const [state, dispatch] = useReducer(reducer, initialState);
 
+    function validateFullName(fullName){
+        const namePattern = /^[A-Za-z]+ [A-Za-z]+$/;
+        if(!namePattern.test(fullName)){
+            return "Full name must contain only alphabetical characters and include both a first and last name.";
+    }
+    return "";
+    }
+
     function handleSubmit(e) {
         // Prevents constant refresh of form
         e.preventDefault();
 
+
+    const fullNameError = validateFullName(state.data.fullName);
+    if (fullNameError){
+        dispatch({type: 'SET_NAME_ERROR'})
+        
+    } else {
+        dispatch({type: 'CLEAR_NAME_ERROR'})
+    }
+
+
+
         // Start loading and clear previous error
         dispatch({ type: 'CLEAR_ERROR' });
+
+    
 
 
         // If required fields are not filled, show an error
@@ -93,3 +127,42 @@ const ContactForm = () => {
 };
 
 export default ContactForm;
+
+
+
+//pseudocode
+//add your new state field to initialState = nameError: false,
+
+//Add Validation Function:
+//Create a function that checks your state can only have inputs that you want
+//fullName case /^[A-Za-z]+ [A-Za-z]+$/  (bunch of random characters)
+//if (!namePattern.test(fullName)) .test here is not related to unit testing or anything similar.
+//it is the .test() method used for checking a string against a regular expression(regex aka the bunch of random characters)
+// In our case if the tested fullName is not the same as the namePattern then we return an error message.
+//im Assuming that the return "" empty field is to let the code know that if it is correct the error stays empty.
+
+//Modify handleClick:
+//I need to create an error variable called fullNameError that is compared to the validateFullName function (this takes its data from the regex)
+// if else conditionals where we create our actions
+//type: SET_NAME_ERROR
+//type: CLEAR_NAME_ERROR
+//add your variable to the list of SHOW_ERROR. This will mean that if an error is found your code will know to show the action of SHOW_ERROR.
+
+//Update the Reducer
+//update with the name error cases
+//One case rhows the error the other does not. SET_NAME_ERROR (data included)  CLEAR_NAME_ERROR (empty)
+
+
+//Display error in jsx
+// if the state.nameError is true then it will change the css being shown
+{/* <input
+   /////className={`${styles.input} ${state.nameError ? styles.errorOutline : ''}`}////////
+    type="text"
+    value={state.data.fullName}
+    name="fullName"
+    onChange={handleChange}
+/> */}
+
+//Here it automatically runs error as true so we will need to change the code
+//basically saying hey if this is true render the css that we want to show muahahahaa
+// {state.nameError && <p className={styles.error}>{state.nameError}</p>}
