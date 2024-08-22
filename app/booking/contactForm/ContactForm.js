@@ -47,7 +47,7 @@ function reducer(state, action) {
                 successState: state.successState, // Preserve successState on reset
             };
         case 'BUTTON_SWITCH':
-            console.log('Button Switch Triggered');
+            //console.log('Button Switch Triggered');
             return {
                 ...state,
                 loadingState: true,

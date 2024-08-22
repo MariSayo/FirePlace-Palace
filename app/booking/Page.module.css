@@ -1,7 +1,11 @@
 .title {
-  padding: 2rem 3rem;
+  width: 100%;
+  margin: 0 auto;
+  text-align: center;
+  padding: 1rem 5rem;
   background-color: orange;
-  margin: 1rem;
+  font-size: 2rem;
+  border-radius: 6px;
 }
 
 .inputGroup {
