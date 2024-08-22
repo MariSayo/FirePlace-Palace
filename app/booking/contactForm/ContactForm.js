@@ -17,6 +17,7 @@ const initialState = {
     },
     fieldErrors: {
         fullName: "",
+        postcode:""
     },
     loadingState: false,
     successState: false,
@@ -92,6 +93,19 @@ const ContactForm = () => {
         return "";
     }
 
+    function validatePostcode(postcode) {
+            // Regular expression to match valid UK postcode formats
+            
+            const postcodePattern = /^[A-Z]{1,2}\d{1,2}[A-Z\d]? \d[A-Z]{2}$/;
+            // Remove any spaces from the postcode before testing
+            
+            // Test the postcode against the pattern - This line removes any spaces from the input postcode. It uses replace with a regular expression (\s matches any whitespace character) and the g flag to replace all occurrences of spaces with an empty string.
+            if(!postcodePattern.test(postcode)) {
+                return "Please enter a valid UK Postcode"
+            }
+            return "";
+        }
+
     function handleSubmit(e) {
         // Prevents constant refresh of form
         e.preventDefault();
@@ -108,7 +122,15 @@ const ContactForm = () => {
             dispatch({ type: 'CLEAR_FIELD_ERROR', payload: { field: 'fullName' } });
         }
 
-
+        const postcodeError = validatePostcode(state.data.postcode);
+        if (postcodeError) {
+            dispatch({
+                type: 'SET_FIELD_ERROR',
+                payload: {field: 'postcode', error: postcodeError }
+            })
+        } else {
+            dispatch({ type: 'CLEAR_FIELD_ERROR', payload: { field: 'postcode' } });
+        }
 
         // Start loading and clear previous error
         dispatch({ type: 'CLEAR_ERROR' });
@@ -176,3 +198,32 @@ export default ContactForm;
 //Here it automatically runs error as true so we will need to change the code
 //basically saying hey if this is true render the css that we want to show muahahahaa
 // {state.nameError && <p className={styles.error}>{state.nameError}</p>}
+
+
+/////////////////////////////////////////////////////////////////////////
+
+
+
+//1. put postcode in inital state -empty string
+//create the function that contains and tests postcode input against anything other than UK postcode format
+
+
+// 2. Copy code
+// function isValidUKPostcode(postcode) {
+//     // Regular expression to match valid UK postcode formats
+//     const postcodePattern = /^([A-Z]{1,2}\d{1,2}[A-Z]?\s?\d[A-Z]{2}|GIR\s?0AA)$/i;
+    
+//     // Remove any spaces from the postcode before testing
+//     const formattedPostcode = postcode.replace(/\s/g, '');
+    
+//     // Test the postcode against the pattern
+//     return postcodePattern.test(formattedPostcode);
+// }
+
+
+// 3. //Modify handleClick:
+//I need to create an error variable called postcodeError that is compared to the isValidUKPostcode function (this takes its data from the regex)
+// if else conditionals where we create our actions
+//type: SET_POSTCODE_ERROR
+//type: CLEAR_POSTCODE_ERROR
+//add your variable to the list of SHOW_ERROR. This will mean that if an error is found your code will know to show the action of SHOW_ERROR.
