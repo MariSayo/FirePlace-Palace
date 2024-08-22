@@ -41,11 +41,6 @@ function reducer(state, action) {
                 ...state,
                 error: true
             };
-        case 'CLEAR_ERROR':
-            return {
-                ...state,
-                error: false
-            };
         case 'RESET_FIELDS':
             return {
                 ...initialState,
@@ -127,80 +122,108 @@ function validatEmail(email) {
     }
     return "";
 }
-    function handleSubmit(e) {
-        // Prevents constant refresh of form
-        e.preventDefault();
-
-// full name dispatches depending on t/f
-        const fullNameError = validateFullName(state.data.fullName);
-        if (fullNameError) {
-            dispatch({
-                type: 'SET_FIELD_ERROR',
-                payload: { field: 'fullName', error: fullNameError }
-            });
-
-        } else {
-            dispatch({ 
-                type: 'CLEAR_FIELD_ERROR', 
-                payload: { field: 'fullName' } });
-        }
-// postcode dispatches depending on t/f
-        const postcodeError = validatePostcode(state.data.postcode);
-        if (postcodeError) {
-            dispatch({
-                type: 'SET_FIELD_ERROR',
-                payload: {field: 'postcode', error: postcodeError }
-            })
-        } else {
-            dispatch({ 
-                type: 'CLEAR_FIELD_ERROR', 
-                payload: { field: 'postcode' } });
-        }
-        // number dispatches depending on t/f
-        const numberError = validateUkTelNum(state.data.number);
-        if (numberError) {
-            dispatch({
-                type: 'SET_FIELD_ERROR',
-                payload: {field: 'number', error: numberError }
-            })
-        } else {
-            dispatch({ 
-                type: 'CLEAR_FIELD_ERROR', 
-                payload: { field: 'number' } 
-            });
-        }
-        // email dispatches depending on t/f
-        const emailError = validatEmail(state.data.email);
-        if (emailError) {
-            dispatch({
-                type: 'SET_FIELD_ERROR',
-                payload: {field: 'email', error: emailError }
-            })
-        } else {
-            dispatch({ 
-                type: 'CLEAR_FIELD_ERROR', 
-                payload: { field: 'email' } 
-            });
-        }
-
-        // Start loading and clear previous error
-        dispatch({ type: 'CLEAR_ERROR' });
-
-
-
-
-        // If required fields are not filled, show an error
-        if (!state.data.fullName || !state.data.postcode || !state.data.house || !state.data.city || !state.data.number || !state.data.number) {
-            dispatch({ type: 'SHOW_ERROR' });
-        } else {
-            dispatch({ type: 'BUTTON_SWITCH' }); // change loading state to true (changing text to loading)
-            setTimeout(() => {
-                dispatch({ type: 'RESET_FIELDS' }); // resets fields
-                dispatch({ type: 'SUCCESS_TOGGLE' });
-                console.log(state);
-            }, 2000);
-        }
+// validhouse
+function validHouse(house) {
+    if (!house) {
+        return "enter address";
     }
+    return "";
+}
+// validcity
+function validcity(city) {
+    if (!city) {
+        return "enter a city";
+    }
+    return "";
+}
+
+function handleSubmit(e) {
+    e.preventDefault();
+    // SETTING ERROR VARIABLE TO CHANGE
+    let hasErrors = false;  
+
+    // Validate fullName
+    const fullNameError = validateFullName(state.data.fullName);
+    if (fullNameError) {
+        dispatch({
+            type: 'SET_FIELD_ERROR',
+            payload: { field: 'fullName', error: fullNameError }
+        });
+        hasErrors = true;
+    } else {
+        dispatch({ type: 'CLEAR_FIELD_ERROR', payload: { field: 'fullName' } });
+    }
+
+    // Validate postcode
+    const postcodeError = validatePostcode(state.data.postcode);
+    if (postcodeError) {
+        dispatch({
+            type: 'SET_FIELD_ERROR',
+            payload: { field: 'postcode', error: postcodeError }
+        });
+        hasErrors = true;
+    } else {
+        dispatch({ type: 'CLEAR_FIELD_ERROR', payload: { field: 'postcode' } });
+    }
+    // Validate house
+    const houseError = validHouse(state.data.house);
+    if (houseError) {
+        dispatch({
+            type: 'SET_FIELD_ERROR',
+            payload: { field: 'house', error: houseError }
+        });
+        hasErrors = true;
+    } else {
+        dispatch({ type: 'CLEAR_FIELD_ERROR', payload: { field: 'house' } });
+    }
+
+    // Validate city
+    const cityError = validcity(state.data.city);
+    if (cityError) {
+        dispatch({
+            type: 'SET_FIELD_ERROR',
+            payload: { field: 'city', error: cityError }
+        });
+        hasErrors = true;
+    } else {
+        dispatch({ type: 'CLEAR_FIELD_ERROR', payload: { field: 'city' } });
+    }
+
+    // Validate phone number
+    const telError = validateUkTelNum(state.data.number);
+    if (telError) {
+        dispatch({
+            type: 'SET_FIELD_ERROR',
+            payload: { field: 'number', error: telError }
+        });
+        hasErrors = true;
+    } else {
+        dispatch({ type: 'CLEAR_FIELD_ERROR', payload: { field: 'number' } });
+    }
+    // Validate email
+    const emailError = validatEmail(state.data.email);
+    if (emailError) {
+        dispatch({
+            type: 'SET_FIELD_ERROR',
+            payload: { field: 'email', error: emailError }
+        });
+        hasErrors = true;
+    } else {
+        dispatch({ type: 'CLEAR_FIELD_ERROR', payload: { field: 'email' } });
+    }
+
+    
+
+    // Only trigger BUTTON_SWITCH if there are no errors
+    if (!hasErrors) {
+        dispatch({ type: 'BUTTON_SWITCH' });
+        setTimeout(() => {
+            dispatch({ type: 'RESET_FIELDS' });
+            dispatch({ type: 'SUCCESS_TOGGLE' });
+            console.log(state);
+        }, 2000);
+    }
+}
 
     return (
         <>
