@@ -74,3 +74,11 @@
   background-color: #e77422;
   font-size: 3rem;
 }
+.errorOutline {
+  border-color: red !important;
+}
+.errorMessage {
+color: red;
+font-size: 0.875rem;
+margin-top: 0.5rem;
+}
