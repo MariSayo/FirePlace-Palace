@@ -10,7 +10,7 @@ const Form = ({ state, dispatch, onSubmit }) => {
 
     const extraFormOptions = [
         { Labelfor: "number", Labelcontent: "Tel number*", inputType: "tel", inputValue: state.data.number, inputName: "number" },
-        { Labelfor: "email", Labelcontent: "Email*", inputType: "email", inputValue: state.data.email, inputName: "email" },
+        { Labelfor: "email", Labelcontent: "Email*", inputType: "text", inputValue: state.data.email, inputName: "email" },
     ];
 
     function handleChange(e) {
@@ -59,6 +59,9 @@ const Form = ({ state, dispatch, onSubmit }) => {
                                 name={formInput.inputName}
                                 onChange={handleChange}
                             />
+                            {state.fieldErrors[formInput.inputName] && (
+                                <p className={styles.errorMessage}>{state.fieldErrors[formInput.inputName]}</p>
+                            )}
                         </div>
                     ))}
                 </fieldset>

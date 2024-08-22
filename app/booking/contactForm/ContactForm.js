@@ -17,13 +17,15 @@ const initialState = {
     },
     fieldErrors: {
         fullName: "",
-        postcode:""
+        postcode: "",
+        number: "",
+        email: "",
     },
     loadingState: false,
     successState: false,
     error: false,
 };
-
+// reducer function
 function reducer(state, action) {
     switch (action.type) {
         case 'SET_FIELD':
@@ -82,9 +84,11 @@ function reducer(state, action) {
     }
 }
 
+//component
 const ContactForm = () => {
+    //declaring our reducer hook
     const [state, dispatch] = useReducer(reducer, initialState);
-
+// validating fullName function
     function validateFullName(fullName) {
         const namePattern = /^[A-Za-z]+ [A-Za-z]+$/;
         if (!namePattern.test(fullName)) {
@@ -93,6 +97,8 @@ const ContactForm = () => {
         return "";
     }
 
+
+// validating postcode function
     function validatePostcode(postcode) {
             // Regular expression to match valid UK postcode formats
             
@@ -105,12 +111,27 @@ const ContactForm = () => {
             }
             return "";
         }
-
+// validateUkTelNum
+function validateUkTelNum(number) {
+    const numberPattern = /^(((\+44\s?\d{4}|\(?0\d{4}\)?)\s?\d{3}\s?\d{3})|((\+44\s?\d{3}|\(?0\d{3}\)?)\s?\d{3}\s?\d{4})|((\+44\s?\d{2}|\(?0\d{2}\)?)\s?\d{4}\s?\d{4}))(\s?\#(\d{4}|\d{3}))?$/;
+    if (!numberPattern.test(number)) {
+        return "Number must be a UK valid number";
+    }
+    return "";
+}
+// validateUkTelNum
+function validatEmail(email) {
+    const emailPattern = /^(?:[a-z0-9!#$%&'*+/=?^_`{|}~-]+(?:\.[a-z0-9!#$%&'*+/=?^_`{|}~-]+)*|"(?:[\x01-\x08\x0b\x0c\x0e-\x1f\x21\x23-\x5b\x5d-\x7f]|\\[\x01-\x09\x0b\x0c\x0e-\x7f])*")@(?:(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?|\[(?:(?:(2(5[0-5]|[0-4][0-9])|1[0-9][0-9]|[1-9]?[0-9]))\.){3}(?:(2(5[0-5]|[0-4][0-9])|1[0-9][0-9]|[1-9]?[0-9])|[a-z0-9-]*[a-z0-9]:(?:[\x01-\x08\x0b\x0c\x0e-\x1f\x21-\x5a\x53-\x7f]|\\[\x01-\x09\x0b\x0c\x0e-\x7f])+)\])?$/;
+    if (!emailPattern.test(email)) {
+        return "Email must be a valid format";
+    }
+    return "";
+}
     function handleSubmit(e) {
         // Prevents constant refresh of form
         e.preventDefault();
 
-
+// full name dispatches depending on t/f
         const fullNameError = validateFullName(state.data.fullName);
         if (fullNameError) {
             dispatch({
@@ -119,9 +140,11 @@ const ContactForm = () => {
             });
 
         } else {
-            dispatch({ type: 'CLEAR_FIELD_ERROR', payload: { field: 'fullName' } });
+            dispatch({ 
+                type: 'CLEAR_FIELD_ERROR', 
+                payload: { field: 'fullName' } });
         }
-
+// postcode dispatches depending on t/f
         const postcodeError = validatePostcode(state.data.postcode);
         if (postcodeError) {
             dispatch({
@@ -129,7 +152,35 @@ const ContactForm = () => {
                 payload: {field: 'postcode', error: postcodeError }
             })
         } else {
-            dispatch({ type: 'CLEAR_FIELD_ERROR', payload: { field: 'postcode' } });
+            dispatch({ 
+                type: 'CLEAR_FIELD_ERROR', 
+                payload: { field: 'postcode' } });
+        }
+        // number dispatches depending on t/f
+        const numberError = validateUkTelNum(state.data.number);
+        if (numberError) {
+            dispatch({
+                type: 'SET_FIELD_ERROR',
+                payload: {field: 'number', error: numberError }
+            })
+        } else {
+            dispatch({ 
+                type: 'CLEAR_FIELD_ERROR', 
+                payload: { field: 'number' } 
+            });
+        }
+        // email dispatches depending on t/f
+        const emailError = validatEmail(state.data.email);
+        if (emailError) {
+            dispatch({
+                type: 'SET_FIELD_ERROR',
+                payload: {field: 'email', error: emailError }
+            })
+        } else {
+            dispatch({ 
+                type: 'CLEAR_FIELD_ERROR', 
+                payload: { field: 'email' } 
+            });
         }
 
         // Start loading and clear previous error
