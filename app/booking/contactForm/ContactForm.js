@@ -204,7 +204,7 @@ function validatEmail(email) {
 
     return (
         <>
-            {state.successState ? <p className={styles.successMessage}>Success!!!!!</p> : <Form state={state} dispatch={dispatch} onSubmit={handleSubmit} />}
+            {state.successState ? <p className={styles.successMessage}>We have got your request we will call you back as soon as possible!</p> : <Form state={state} dispatch={dispatch} onSubmit={handleSubmit} />}
         </>
     );
 };

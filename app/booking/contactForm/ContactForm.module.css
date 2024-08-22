@@ -69,16 +69,19 @@
 }
 
 .successMessage {
+  width: 50%;
+  margin: 0 auto;
   text-align: center;
   padding: 5rem;
-  background-color: #e77422;
+  background-color: orange;
   font-size: 3rem;
+  border-radius: 6px;
 }
 .errorOutline {
   border-color: red !important;
 }
 .errorMessage {
-color: red;
-font-size: 0.875rem;
-margin-top: 0.5rem;
+  color: red;
+  font-size: 0.875rem;
+  margin-top: 0.5rem;
 }
