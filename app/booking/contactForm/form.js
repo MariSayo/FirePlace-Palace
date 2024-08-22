@@ -33,12 +33,15 @@ const Form = ({ state, dispatch, onSubmit }) => {
                         <div key={formInput.inputName} className={styles.inputGroup}>
                             <label className={styles.label} htmlFor={formInput.Labelfor}>{formInput.Labelcontent}</label>
                             <input
-                                className={styles.input}
+                                className={`${styles.input} ${state.fieldErrors[formInput.inputName] && styles.errorOutline}`}
                                 type={formInput.inputType}
                                 value={formInput.inputValue}
                                 name={formInput.inputName}
                                 onChange={handleChange}
                             />
+                            {state.fieldErrors[formInput.inputName] && (
+                                <p className={styles.errorMessage}>{state.fieldErrors[formInput.inputName]}</p>
+                            )}
                         </div>
                     ))}
                 </fieldset>

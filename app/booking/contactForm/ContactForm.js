@@ -13,12 +13,14 @@ const initialState = {
         city: "",
         number: "",
         email: ""
-       
+
+    },
+    fieldErrors: {
+        fullName: "",
     },
     loadingState: false,
     successState: false,
     error: false,
-    nameError: false
 };
 
 function reducer(state, action) {
@@ -58,17 +60,22 @@ function reducer(state, action) {
                 loadingState: false,  // Reset loading state after success
                 successState: true,
             };
-            case 'SET_NAME_ERROR':
-                return {
-                    ...state,
-                    nameError: true,
-
-                };
-            case 'CLEAR_NAME_ERROR':
-                return {
-                    ...state,
-                    nameError: false,
-                }
+        case 'SET_FIELD_ERROR':
+            return {
+                ...state,
+                fieldErrors: {
+                    ...state.fieldErrors,
+                    [action.payload.field]: action.payload.error,
+                },
+            };
+        case 'CLEAR_FIELD_ERROR':
+            return {
+                ...state,
+                fieldErrors: {
+                    ...state.fieldErrors,
+                    [action.payload.field]: "",
+                },
+            };
         default:
             return state;
     }
@@ -77,12 +84,12 @@ function reducer(state, action) {
 const ContactForm = () => {
     const [state, dispatch] = useReducer(reducer, initialState);
 
-    function validateFullName(fullName){
+    function validateFullName(fullName) {
         const namePattern = /^[A-Za-z]+ [A-Za-z]+$/;
-        if(!namePattern.test(fullName)){
+        if (!namePattern.test(fullName)) {
             return "Full name must contain only alphabetical characters and include both a first and last name.";
-    }
-    return "";
+        }
+        return "";
     }
 
     function handleSubmit(e) {
@@ -90,20 +97,23 @@ const ContactForm = () => {
         e.preventDefault();
 
 
-    const fullNameError = validateFullName(state.data.fullName);
-    if (fullNameError){
-        dispatch({type: 'SET_NAME_ERROR'})
-        
-    } else {
-        dispatch({type: 'CLEAR_NAME_ERROR'})
-    }
+        const fullNameError = validateFullName(state.data.fullName);
+        if (fullNameError) {
+            dispatch({
+                type: 'SET_FIELD_ERROR',
+                payload: { field: 'fullName', error: fullNameError }
+            });
+
+        } else {
+            dispatch({ type: 'CLEAR_FIELD_ERROR', payload: { field: 'fullName' } });
+        }
 
 
 
         // Start loading and clear previous error
         dispatch({ type: 'CLEAR_ERROR' });
 
-    
+
 
 
         // If required fields are not filled, show an error

@@ -1,5 +1,17 @@
-.title{
-    padding: 2rem 3rem;
-    background-color: orange;
-    margin: 1rem;
+.title {
+  padding: 2rem 3rem;
+  background-color: orange;
+  margin: 1rem;
+}
+
+.inputGroup {
+  margin-bottom: 1rem;
+}
+.errorOutline {
+  border: 2px solid red;
+}
+.errorMessage {
+  color: red;
+  font-size: 0.875rem;
+  margin-top: 0.5rem;
 }
