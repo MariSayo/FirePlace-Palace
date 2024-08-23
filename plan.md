@@ -63,3 +63,58 @@ If error is present stop loading screen on button - make sure button normal agai
 step 4: Error shows as red box around input that has errored
 
 - there is indiviudal error message below each box
+
+**HACKATHON PLAN GO GO GO 🔥**
+
+   `“npm init playwright@latest”`
+    - You should be asked a few questions:
+         - Choose JavaScript.
+         - Choose `tests` (this is the folder where it'll place your tests).
+         - If asked to add a GitHub Actions workflow, choose `no`.
+         -If asked to install Playwright browsers, choose `yes`.
+        - delete pre-created test files
+
+example User Journeys
+- load the home page, click into the booking page, fill out the form, submit the form etc.
+-  load the home page then interact with the reviews components.
+- these are very broad examples.
+
+
+**USER JOURNEY 1- from homepage to opening the reviews**
+- user clicks link - Checks URL correct
+- homepage appears
+- User scroll to reviews
+- press individual reviews buttons
+- individual reviews pop up
+
+stretch:
+- Did not test the closeability of the buttons
+
+**USER JOURNEY 2- getting to the form and submitting the form**
+- user clicks link - Checks URL correct
+- homepage appears
+- User scroll to Link for form
+- User clicks link
+- Form page appears - Checks URL correct
+- User fills in all fields correctly
+- clicks submit button
+- loading button appears
+- success box appears
+
+
+stretch:
+- Where to go from success page?
+- reload to homepage?
+
+**USER JOURNEY 3- getting to form and submitting incorrect information**
+- user clicks link - Checks URL correct
+- homepage appears
+- User scroll to Link for form
+- User clicks link
+- Form page appears - Checks URL correct
+- User submits one input box incorrectly
+- clicks submit button
+- errors appear below input box/ possibly at bottom of screen as well
+
+stretch:
+- test errors for each input.
