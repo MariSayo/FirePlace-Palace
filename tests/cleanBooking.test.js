@@ -7,7 +7,7 @@ test('navigate and submit form', async ({ page }) => {
 
   // expect to go to booking page
   // Wait for navigation to complete
-  await page.waitForNavigation();
+  await page.waitForURL('**/booking')
 
   // Assert that the current URL is the booking page
   expect(page.url()).toBe('http://localhost:3000/booking');
@@ -41,5 +41,7 @@ test('navigate and submit form', async ({ page }) => {
     .click()
 
   //checking "we got your booking"
-  await page.getByText('We have got your request we').click()
+  await expect(
+    page.locator('p', { hasText: 'We have got your request we will call you back as soon as possible!' })
+  ).toBeVisible()
 })
